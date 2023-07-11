@@ -1,0 +1,16 @@
+resource "aws_cloudwatch_metric_alarm" "cpu_utilization" {
+  alarm_name          = "ec-cpu-alarm"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = var.cpu_utilization.evaluation_periods
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ElastiCache"
+  period              = var.cpu_utilization.period
+  statistic           = "Average"
+  threshold           = var.cpu_utilization.threshold
+  alarm_description   = "Alert when the ElastiCache's CPU Utilization is greater than or equal to threshold"
+  alarm_actions       = var.cpu_utilization.alarm_actions
+
+  dimensions = {
+    CacheClusterId = module.cloudwatch_elasticache.member_clusters.cluster-one
+  }
+}

@@ -24,3 +24,9 @@ variable "assign_generated_ipv6_cidr_block" {
   default     = false
 }
 
+variable "availability_zone" {
+  type = string
+  default = "ap-south-1"
+  
+}
+
